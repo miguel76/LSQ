@@ -43,7 +43,7 @@ public class TestConnectionLoss {
     @Test(expected=QueryException.class)
     public void testUnknownHostSimple() {
         Query query = QueryFactory.create("SELECT * { ?s a ?t } LIMIT 1");
-        try (QueryExecution qe = QueryExecutionHTTPBuilder.create().endpoint(connectionRefusedUrl).query(query).build()) {
+        try (QueryExecution qe = QueryExecutionHTTPBuilder.create().endpoint(unknownHostUrl).query(query).build()) {
             ResultSetFormatter.consume(qe.execSelect());
         }
     }
