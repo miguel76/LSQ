@@ -30,7 +30,7 @@ public class TestConnectionLoss {
     }
 
     /** The catch block should catch the connection refused exception */
-    @Test
+    // @Test
     public void testConnectionRefusedDetailed() {
         Query query = QueryFactory.create("SELECT * { ?s a ?t } LIMIT 1");
         try (QueryExecution qe = QueryExecutionHTTPBuilder.create().endpoint(connectionRefusedUrl).query(query).build()) {
