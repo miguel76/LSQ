@@ -63,18 +63,21 @@
 	</modules>
 
 	<properties>
-		<jena.version>4.5.0</jena.version>
-		<jenax.version>4.5.0-1-SNAPSHOT</jenax.version>
-		<aksw-commons.version>0.9.3-SNAPSHOT</aksw-commons.version>
+		<jena.version>4.7.0-SNAPSHOT</jena.version>
+		<jenax.version>4.7.0-1-SNAPSHOT</jenax.version>
+		<aksw-commons.version>0.9.5-SNAPSHOT</aksw-commons.version>
 
 		<spark.version>3.0.1</spark.version>
-		<spark.deps.scope>provided</spark.deps.scope>
+		<spark.deps.scope>compile</spark.deps.scope>
 
 		<scala.binary.version>2.12</scala.binary.version>
 		<scala.version.suffix>_${scala.binary.version}</scala.version.suffix>
 
 		<slf4j.version>1.7.36</slf4j.version>
-		<log4j.version>2.17.1</log4j.version>
+		<log4j.version>2.18.0</log4j.version>
+
+
+		<jackson.version>2.13.0</jackson.version>
 
 		<junit.version>4.13.1</junit.version>
 
@@ -160,6 +163,12 @@
 			<dependency>
 				<groupId>org.aksw.commons</groupId>
 				<artifactId>aksw-commons-beans</artifactId>
+				<version>${aksw-commons.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aksw.commons</groupId>
+				<artifactId>aksw-commons-utils</artifactId>
 				<version>${aksw-commons.version}</version>
 			</dependency>
 
@@ -319,8 +328,8 @@
 			<!-- <dependency> <groupId>org.aksw.jena-sparql-api</groupId> <artifactId>jena-sparql-api-sparql-ext</artifactId> 
 				<version>${jenax.version}</version> </dependency> -->
 			<dependency>
-				<groupId>org.topbraid</groupId>
-				<artifactId>spin</artifactId>
+				<groupId>org.aksw.thirdparty.org.spinrdf</groupId>
+				<artifactId>spinrdf</artifactId>
 				<version>2.0.0</version>
 				<exclusions>
 					<exclusion>
@@ -342,6 +351,14 @@
 				<version>${slf4j.version}</version>
 			</dependency>
 
+            <!-- FasterXML -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
 			<!-- <dependency> <groupId>org.aksw.fedx</groupId> <artifactId>fedx-jsa</artifactId> 
 				<version>3.1.0-1-SNAPSHOT</version> <exclusions> <exclusion> <groupId>org.slf4j</groupId> 
@@ -744,20 +761,18 @@
 			</snapshots>
 		</repository>
 
+		<!-- Fallback for spin due to shutdown up topbraid repo. Maybe we should deploy an org.aksw.thirdparty.org.tobpraid.spin artifact. -->
 		<repository>
-			<id>com.topquadrant.internal</id>
-			<url>https://www.topquadrant.com/repository/spin</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+                        <id>maven.aksw.internal</id>
+                        <name>AKSW Internal Repository</name>
+                        <url>https://maven.aksw.org/archiva/repository/internal</url>
+                        <releases>
+                                <enabled>true</enabled>
+                        </releases>
+                        <snapshots>
+                                <enabled>false</enabled>
+                        </snapshots>
+                </repository>
 
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
 	</repositories>
 </project>
